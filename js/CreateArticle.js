@@ -18,23 +18,29 @@ String.prototype.format = function() {
 		});
 }
 
-var json = {
-	"title": "TestCreateIssues",
+var jsonData = {
+	"title": "再次测试下",
 	"body": "测试一下post创建issues",
-	"assignee": "Antecer",
+	"assignee": null,
 	"milestone": null,
-	"labels": ""
+	"labels": []
 }
 
 $(document).ready(function() {
 	$("#postIssues").click(function() {
+		jsonData.title = $("#title").val();
+		jsonData.body = $("#content").val();
+		alert($("#submit").val()+":"+$("#password").val());
 		$.ajax({
-			headers: { Accept: "application/vnd.github.squirrel-girl-preview.full+json" },
-			dataType: "json",
-			type: "post",
 			url: issues.url.format(issues.author, issues.project),
-			async: true,
-			data: json,
+			type: "POST",
+			beforeSend: function(xhr) {
+//				xhr.setRequestHeader("Authorization", "token "+ PersonalAccessToken);
+				xhr.setRequestHeader("Authorization", "Basic " + btoa($("#username").val()+":"+$("#password").val()));
+			},
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(jsonData),
 			success: function() {
 				$("#comment").append(data);
 			}
