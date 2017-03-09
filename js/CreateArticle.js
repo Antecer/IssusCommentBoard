@@ -1,5 +1,5 @@
 var issues = {
-	url: "https://api.github.com/repos/{0}/{1}/issues",
+	url: "/repos/{0}/{1}/issues",
 	title: "",
 	body: "",
 	assignee: null,
@@ -35,8 +35,8 @@ $(document).ready(function() {
 					type: "User",
 					site_admin: false
 				}],
-				milestone: null,
-				labels: []
+				milestone: 1,
+				labels: ["bug"]
 			},
 			function(data) {
 				$("#comment").empty();
