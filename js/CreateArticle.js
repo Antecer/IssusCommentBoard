@@ -10,6 +10,15 @@ var issues = {
 	project: "IssusCommentBoard"
 }
 
+String.prototype.format = function() {
+	var args = arguments;
+	return this.replace(/\{(\d+)\}/g,
+		function(m, i) {
+			return args[i];
+		});
+}
+
+
 $(document).ready(function() {
 	$("#postIssues").click(function() {
 		var xmlhttp = new XMLHttpRequest();
