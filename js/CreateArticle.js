@@ -27,10 +27,9 @@ var jsonData = {
 }
 
 $(document).ready(function() {
-	$("#postIssues").click(function() {
+	$("#submit").click(function() {
 		jsonData.title = $("#title").val();
-		jsonData.body = $("#content").val();
-		alert($("#submit").val()+":"+$("#password").val());
+		jsonData.body = $("#content").val();		
 		$.ajax({
 			url: issues.url.format(issues.author, issues.project),
 			type: "POST",
@@ -41,8 +40,8 @@ $(document).ready(function() {
 			contentType: "application/json",
 			dataType: "json",
 			data: JSON.stringify(jsonData),
-			success: function() {
-				$("#comment").append(data);
+			success: function(data,status) {
+				alert(status);
 			}
 		});
 	});
